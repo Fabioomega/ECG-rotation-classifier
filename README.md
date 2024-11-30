@@ -1,5 +1,5 @@
 # ECG Rotation Classifier
-A simple rotation classifier built withe the mobilenet_small to detected whether an ECG image was rotated or not. Only works for increments of 90 degrees.
+A simple rotation classifier built with the mobilenet_small model to detected whether an ECG image was rotated or not and by how much. Only works for increments of 90 degrees.
 For more information and example of use see [example](https://github.com/Fabioomega/ECG-rotation-classifier/blob/main/example.py "example").
 
 # Training and Validation
