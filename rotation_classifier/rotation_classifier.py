@@ -27,8 +27,17 @@ class ECGRotationClassifier:
 
     def _img_to_tensor(self, img: Union[np.ndarray, Image.Image]):
         if isinstance(img, Image.Image):
-            return F.pil_to_tensor(img)
+            img = F.pil_to_tensor(img)
+            if img.shape[0] == 4:
+                raise ValueError(
+                    "The image provided has an alpha channel. Please strip it before sending it to the model!"
+                )
+            return img
         else:
+            if img.shape[-1] == 4:
+                raise ValueError(
+                    "The image provided has an alpha channel. Please strip it before sending it to the model!"
+                )
             return torch.from_numpy(img).permute((2, 0, 1))
 
     def _normalize_img(self, img: torch.Tensor) -> torch.Tensor:
