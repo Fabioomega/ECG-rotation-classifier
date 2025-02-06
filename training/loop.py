@@ -29,7 +29,7 @@ def calculate_accuracy(output: np.ndarray, target):
     binary_output = np.argmax(output, axis=1)
     target_labels = np.argmax(target, axis=1)
 
-    roc_auc = roc_auc_score(target_labels, output, average="macro", multi_class="ovr")
+    roc_auc = roc_auc_score(target, output, average="macro", multi_class="ovr")
     precision = precision_score(target_labels, binary_output, average="macro")
     recall = recall_score(target_labels, binary_output, average="macro")
     f1 = f1_score(target_labels, binary_output, average="macro")
@@ -66,6 +66,7 @@ def validate_single_batch(val_loader, model, loss_fn):
 
             bar.set_description(f"Loss: {loss:.5f}.")
 
+    model.train()
     acc = calculate_accuracy(np.vstack(accum_output), np.vstack(accum_target))
     mean_loss = mean_loss / n
     acc["loss"] = mean_loss
